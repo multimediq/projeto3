@@ -55,4 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     ul.appendChild(li);
   });
+
+  // 🔴 LINHA IMPORTANTE PARA O REACT
+  window.locais = locais;
 });
