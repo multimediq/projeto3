@@ -124,6 +124,3 @@ reactContainer.id = 'react-root';
 ul.parentNode.insertBefore(reactContainer, ul.nextSibling);
 
 ReactDOM.createRoot(reactContainer).render(e(ListaBotoes));
-
-
-
