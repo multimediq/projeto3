@@ -57,26 +57,36 @@ function ListaBotoes() {
   const [markers, setMarkers] = useState([]);
   const [locais, setLocais] = useState([]);
   const [ativo, setAtivo] = useState(null);
+
   useEffect(() => {
     setMarkers(window.markers || []);
     setLocais(window.locais || []);
   }, []);
+
   function selecionar(marker, index) {
     setAtivo(index);
     window.map.flyTo(marker.getLatLng(), 13, { duration: 1.5 });
     marker.openPopup();
   }
+
   function resetMapa() {
     setAtivo(null);
     window.map.setView([20, 0], 2);
   }
+
   return e(
     'div',
-    { style: { marginTop: '10px' } },
+    {
+      style: {
+        maxHeight: '200px', // altura visível para os botões
+        overflowY: 'scroll'  // barra de scroll sempre visível
+      }
+    },
     [
       e(ContadorInvisivel),
       e(LoggerInvisivel, { texto: 'Mapa carregado' }),
       e(EstadoFantasma),
+
       e(
         'button',
         {
@@ -94,6 +104,7 @@ function ListaBotoes() {
         },
         'Reset do Mapa'
       ),
+
       ...markers.map((marker, index) =>
         e(BotaoLocal, {
           key: index,
@@ -111,6 +122,7 @@ const ul = document.getElementById('locais-list');
 const reactContainer = document.createElement('div');
 reactContainer.id = 'react-root';
 ul.parentNode.insertBefore(reactContainer, ul.nextSibling);
+
 ReactDOM.createRoot(reactContainer).render(e(ListaBotoes));
 
 
